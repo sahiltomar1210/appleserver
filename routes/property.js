@@ -25,19 +25,25 @@ router.post('/search', async (req, res) => {
 
     try{  
         const ids = req.body.id;
-        const idArray =  ids.split(',');
-        const details = await PropertyInfo.find({'_id':{$in:idArray}}).exec();
-        if(details){
-            return  res.json({
-                status: "Success",
-                details
-            })
+        if(ids){
+            const idArray =  ids.split(',');
+            const details = await PropertyInfo.find({'_id':{$in:idArray}}).exec();
+            if(details){
+                return  res.json({
+                    status: "Success",
+                    details
+                })
+            }
+            res.status(403).json({ 
+                status: "Failed",
+                message: "No result Present"
+            });
+        }else{
+            res.status(403).json({ 
+                status: "Failed",
+                message: "Please send input"
+            });
         }
-        res.status(403).json({ 
-            status: "Failed",
-            message: "No result Present"
-        });
-        
         }catch(e){
             res.status(500).json({
                 status: "Failed",
