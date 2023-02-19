@@ -21,10 +21,10 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/search', async (req, res) => {
 
     try{  
-        const {ids} = req.params;
+        const ids = req.body.id;
         const idArray =  ids.split(',');
         const details = await PropertyInfo.find({'_id':{$in:idArray}}).exec();
         if(details){
