@@ -21,6 +21,30 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+
+    try{  
+        const ids = req.params.id
+        const details = await PropertyInfo.find(ids);
+        if(details){
+            return  res.json({
+                status: "Success",
+                details
+            })
+        }
+        res.status(403).json({ 
+            status: "Failed",
+            message: "No result Present"
+        });
+        
+        }catch(e){
+            res.status(500).json({
+                status: "Failed",
+                message: e.message
+            })
+        }
+});
+
 // router.post("/", async (req, res) => {
 //     try{  
 //         const details = await PropertyInfo.create({
