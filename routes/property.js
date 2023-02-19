@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 router.get('/:id', async (req, res) => {
 
     try{  
-        const ids = req.params.id
+        const ids = {req.params.id}
         const details = await PropertyInfo.find(ids);
         if(details){
             return  res.json({
