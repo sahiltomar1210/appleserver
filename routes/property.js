@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get('/search', async (req, res) => {
+router.post('/search', async (req, res) => {
 
     try{  
         const ids = req.body.id;
