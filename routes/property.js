@@ -24,8 +24,8 @@ router.get("/", async (req, res) => {
 router.get('/:id', async (req, res) => {
 
     try{  
-        const ids = {req.params.id}
-        const details = await PropertyInfo.find(ids);
+        const {ids} = req.query;
+        const details = await PropertyInfo.find({'_id':{$in:ids.split(',')}});
         if(details){
             return  res.json({
                 status: "Success",
